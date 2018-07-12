@@ -1,6 +1,8 @@
 <#
 .SYNOPSIS
 	Monitors and stores text clipboard entries.
+.DESCRIPTION
+	Checks for and stores changes to your clipboard for retrieval by powerclip.ps1.
 .PARAMETER Path
 	Path to powerclip store. Defaults to your home path.
 .PARAMETER Limit
@@ -9,20 +11,25 @@
 	Used on initial startup to ignore leftover lock file, if present.
 .PARAMETER Reinitialize
 	Reinitialize the clipboard cache.
+.EXAMPLE
+	.\powerclipd.ps1
+.EXAMPLE
+	.\powerclipd.ps1 -Limit 10
 .NOTES
 	01/18/2017	pbeazley	Initial release.
 	01/25/2017	pbeazley	Added -Reinitialize.
+	07/11/2018	pbeazley	Tidying up.
 #>
-[cmdletbinding(SupportsShouldProcess=$true)]
+[CmdletBinding(SupportsShouldProcess = $false, PositionalBinding = $false, ConfirmImpact = 'Low')]
 Param(
-	[Parameter(Mandatory = $false, Position = 0)]
+	[Parameter(Mandatory = $false, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
 		[string]$Path = "$env:USERPROFILE",
 	[Parameter(Mandatory = $false, Position = 1)]
 		[int]$Limit = 100,
 	[Parameter(Mandatory = $false, Position = 2)]
-		[Switch]$Force,
+		[switch]$Force,
 	[Parameter(Mandatory = $false, Position = 3)]
-		[Switch]$Reinitialize
+		[switch]$Reinitialize
 )
 
 $RunMarker = "$Path/powerclip.lck"
