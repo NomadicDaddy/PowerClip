@@ -37,7 +37,7 @@ $ClipStore = "$Path/powerclip.psd1"
 $ClipArray = @()
 
 # run once
-if ($Force -and (Test-Path -Path $RunMarker -PathType 'Leaf')) {
+if ($Force -and (Test-Path -Path $RunMarker -PathType Leaf)) {
 	Remove-Item -Path $RunMarker -Force
 }
 if (Test-Path -Path $RunMarker) {
@@ -53,7 +53,7 @@ if ($Reinitialize -eq $true -and (Test-Path -Path $ClipStore)) {
 }
 
 # import clips from persisted storage
-if (Test-Path -Path $ClipStore -PathType 'Leaf') {
+if (Test-Path -Path $ClipStore -PathType Leaf) {
 	$ClipArray = Get-Content -Path $ClipStore
 }
 
@@ -98,7 +98,7 @@ try {
 }
 catch {}
 finally {
-	if (Test-Path -Path $RunMarker -PathType 'Leaf') {
+	if (Test-Path -Path $RunMarker -PathType Leaf) {
 		Remove-Item -Path $RunMarker -Force
 		exit 0
 	}

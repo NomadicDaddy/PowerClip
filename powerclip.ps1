@@ -22,7 +22,7 @@ $ClipStore = "$Path/powerclip.psd1"
 $ClipArray = @()
 
 # import clips from persisted storage
-if (Test-Path -Path $ClipStore -PathType 'Leaf') {
+if (Test-Path -Path $ClipStore -PathType Leaf) {
 	$ClipArray = Get-Content -Path $ClipStore
 	if ($ClipArray) {
 		$Export = @()
