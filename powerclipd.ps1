@@ -16,9 +16,9 @@
 .EXAMPLE
 	.\powerclipd.ps1 -Limit 10
 .NOTES
-	01/18/2017	pbeazley	Initial release.
-	01/25/2017	pbeazley	Added -Reinitialize.
-	07/11/2018	pbeazley	Tidying up.
+	01/18/2017	lordbeazley	Initial release.
+	01/25/2017	lordbeazley	Added -Reinitialize.
+	07/11/2018	lordbeazley	Tidying up.
 #>
 [CmdletBinding(SupportsShouldProcess = $false, PositionalBinding = $false, ConfirmImpact = 'Low')]
 Param(
