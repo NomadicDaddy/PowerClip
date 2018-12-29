@@ -10,7 +10,7 @@ To install, use one of the _-install_ scripts provided. To remove, use one of th
 
 To use powerclip to show my cache, I have an alias in my profile. Like this:
 
-`Set-Alias -Name pc -Value 'D:\PowerClip\powerclip.ps1'`
+`Set-Alias -Name 'pc' -Value "$($env:USERPROFILE)\powerclip.ps1"`
 
 You could do the same with a batch file or shortcut on your desktop.
 

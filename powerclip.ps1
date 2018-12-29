@@ -15,10 +15,10 @@
 [CmdletBinding(SupportsShouldProcess = $false, PositionalBinding = $false, ConfirmImpact = 'Low')]
 Param(
 	[Parameter(Mandatory = $false, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
-		[string]$Path = "$env:USERPROFILE"
+		[string]$Path = $env:USERPROFILE
 )
 
-$ClipStore = "$Path/powerclip.psd1"
+$ClipStore = "$($Path)/powerclip.psd1"
 $ClipArray = @()
 
 # import clips from persisted storage

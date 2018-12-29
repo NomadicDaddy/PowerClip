@@ -23,7 +23,7 @@
 [CmdletBinding(SupportsShouldProcess = $false, PositionalBinding = $false, ConfirmImpact = 'Low')]
 Param(
 	[Parameter(Mandatory = $false, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
-		[string]$Path = "$env:USERPROFILE",
+		[string]$Path = $env:USERPROFILE,
 	[Parameter(Mandatory = $false, Position = 1)]
 		[int]$Limit = 100,
 	[Parameter(Mandatory = $false, Position = 2)]
@@ -32,8 +32,8 @@ Param(
 		[switch]$Reinitialize
 )
 
-$RunMarker = "$Path/powerclip.lck"
-$ClipStore = "$Path/powerclip.psd1"
+$RunMarker = "$($Path)/powerclip.lck"
+$ClipStore = "$($Path)/powerclip.psd1"
 $ClipArray = @()
 
 # run once
@@ -44,7 +44,7 @@ if (Test-Path -Path $RunMarker) {
 	Write-Output 'PowerClip is already running. You may also use the Force.'
 	exit 1
 } else {
-	Write-Output "$PID" | Out-File $RunMarker
+	Write-Output $PID | Out-File $RunMarker
 }
 
 # reinitialize
@@ -65,7 +65,7 @@ try {
 		if (-not $PreviousClip) { $PreviousClip = '' }
 		if ($CurrentClip -and $ClipArray -notcontains $CurrentClip) {
 
-			Write-Debug "$CurrentClip"
+			Write-Debug $CurrentClip
 
 			# add current clipboard contents, retain up to cliplimit
 			$ClipArray += $CurrentClip
