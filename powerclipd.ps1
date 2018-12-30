@@ -16,9 +16,10 @@
 .EXAMPLE
 	.\powerclipd.ps1 -Limit 10
 .NOTES
-	01/18/2017	lordbeazley	Initial release.
-	01/25/2017	lordbeazley	Added -Reinitialize.
-	07/11/2018	lordbeazley	Tidying up.
+	01/18/2017	lordbeazley		Initial release.
+	01/25/2017	lordbeazley		Added -Reinitialize.
+	07/11/2018	lordbeazley		Tidying up.
+	12/30/2018	lordbeazley		Fixed hidden bug, fixed hiding spot.
 #>
 [CmdletBinding(SupportsShouldProcess = $false, PositionalBinding = $false, ConfirmImpact = 'Low')]
 Param(
@@ -32,23 +33,23 @@ Param(
 		[switch]$Reinitialize
 )
 
-$RunMarker = "$($Path)/powerclip.lck"
-$ClipStore = "$($Path)/powerclip.psd1"
+$RunMarker = "$($Path)\powerclip.lck"
+$ClipStore = "$($Path)\powerclip.psd1"
 $ClipArray = @()
 
-# run once
+# run once at startup
 if ($Force -and (Test-Path -Path $RunMarker -PathType Leaf)) {
 	Remove-Item -Path $RunMarker -Force
 }
-if (Test-Path -Path $RunMarker) {
+if (Test-Path -Path $RunMarker -PathType Leaf) {
 	Write-Output 'PowerClip is already running. You may also use the Force.'
 	exit 1
 } else {
-	Write-Output $PID | Out-File $RunMarker
+	Out-File -FilePath $RunMarker -Force -InputObject $PID -ErrorAction Stop
 }
 
 # reinitialize
-if ($Reinitialize -eq $true -and (Test-Path -Path $ClipStore)) {
+if ($Reinitialize -eq $true -and (Test-Path -Path $ClipStore -PathType Leaf)) {
 	Remove-Item -Path $ClipStore -Force
 }
 
@@ -58,12 +59,13 @@ if (Test-Path -Path $ClipStore -PathType Leaf) {
 }
 
 # monitor clipboard forever
+$PreviousClip = ''
+$CurrentClip = ''
 try {
 	while($true) {
 
-	# check for clipboard changes
-		if (-not $PreviousClip) { $PreviousClip = '' }
-		if ($CurrentClip -and $ClipArray -notcontains $CurrentClip) {
+		# check for clipboard changes
+		if ($CurrentClip -and $CurrentClip -ne '' -and $ClipArray -notcontains $CurrentClip) {
 
 			Write-Debug $CurrentClip
 
@@ -96,7 +98,9 @@ try {
 
 	}
 }
-catch {}
+catch {
+	$_.Exception
+}
 finally {
 	if (Test-Path -Path $RunMarker -PathType Leaf) {
 		Remove-Item -Path $RunMarker -Force

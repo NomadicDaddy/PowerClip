@@ -8,9 +8,9 @@
 .EXAMPLE
 	.\powerclip.ps1
 .NOTES
-	01/18/2017	lordbeazley	Initial release.
-	01/23/2017	lordbeazley	Reversing the array so most recent clips are on top.
-	07/11/2018	lordbeazley	Tidying up.
+	01/18/2017	lordbeazley		Initial release.
+	01/23/2017	lordbeazley		Reversing the array so most recent clips are on top.
+	07/11/2018	lordbeazley		Tidying up.
 #>
 [CmdletBinding(SupportsShouldProcess = $false, PositionalBinding = $false, ConfirmImpact = 'Low')]
 Param(
@@ -18,7 +18,7 @@ Param(
 		[string]$Path = $env:USERPROFILE
 )
 
-$ClipStore = "$($Path)/powerclip.psd1"
+$ClipStore = "$($Path)\powerclip.psd1"
 $ClipArray = @()
 
 # import clips from persisted storage
