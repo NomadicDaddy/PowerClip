@@ -8,9 +8,9 @@
 .EXAMPLE
 	.\powerclip.ps1
 .NOTES
-	01/18/2017	lordbeazley		Initial release.
-	01/23/2017	lordbeazley		Reversing the array so most recent clips are on top.
-	07/11/2018	lordbeazley		Tidying up.
+	01/18/2017	NomadicDaddy	Initial release.
+	01/23/2017	NomadicDaddy	Reversing the array so most recent clips are on top.
+	07/11/2018	NomadicDaddy	Tidying up.
 #>
 [CmdletBinding(SupportsShouldProcess = $false, PositionalBinding = $false, ConfirmImpact = 'Low')]
 Param(

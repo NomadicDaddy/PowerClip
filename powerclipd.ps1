@@ -16,17 +16,17 @@
 .EXAMPLE
 	.\powerclipd.ps1 -Limit 10
 .NOTES
-	01/18/2017	lordbeazley		Initial release.
-	01/25/2017	lordbeazley		Added -Reinitialize.
-	07/11/2018	lordbeazley		Tidying up.
-	12/30/2018	lordbeazley		Fixed hidden bug, fixed hiding spot.
+	01/18/2017	NomadicDaddy	Initial release.
+	01/25/2017	NomadicDaddy	Added -Reinitialize.
+	07/11/2018	NomadicDaddy	Tidying up.
+	12/30/2018	NomadicDaddy	Fixed hidden bug, fixed hiding spot.
 #>
 [CmdletBinding(SupportsShouldProcess = $false, PositionalBinding = $false, ConfirmImpact = 'Low')]
 Param(
 	[Parameter(Mandatory = $false, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
 		[string]$Path = $env:USERPROFILE,
 	[Parameter(Mandatory = $false, Position = 1)]
-		[int]$Limit = 100,
+		[int]$Limit = 1000,
 	[Parameter(Mandatory = $false, Position = 2)]
 		[switch]$Force,
 	[Parameter(Mandatory = $false, Position = 3)]

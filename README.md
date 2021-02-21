@@ -6,7 +6,8 @@ PowerClip consists of:
 - *powerclipd* -- constantly running monitor executed on logon
 - *powerclip* -- shows your current cache, replaces clipboard with selection
 
-To install, use one of the _-install_ scripts provided. To remove, use one of the _-remove_ scripts provided.
+To install, use _.\powerclipd-install.ps1_ provided.
+To remove, use _.\powerclipd-remove.ps1_ also provided.
 
 To use powerclip to show my cache, I have an alias in my profile. Like this:
 
@@ -23,3 +24,5 @@ This script provides real-world example usage of the following:
 - working with JSON data
 - working with environment variables
 - using try/catch/finally in weird ways
+- working in legacy or core agnostically
+- re-launching as administrator, if required
