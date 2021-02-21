@@ -55,7 +55,7 @@ if ($Reinitialize -eq $true -and (Test-Path -Path $ClipStore -PathType Leaf)) {
 
 # import clips from persisted storage
 if (Test-Path -Path $ClipStore -PathType Leaf) {
-	$ClipArray = Get-Content -Path $ClipStore
+	$ClipArray = (Get-Content -Path $ClipStore)
 }
 
 # monitor clipboard forever
@@ -86,14 +86,14 @@ try {
 		# get current clipboard contents
 		$PreviousClip = $CurrentClip
 		try {
-			$CurrentClip = Get-Clipboard -Format Text -TextFormatType Text
+			$CurrentClip = (Get-Clipboard)
 			$CurrentClip = $CurrentClip.TrimEnd()
 		}
 		catch {
-			$CurrentClip = Get-Clipboard -Format FileDropList
+			$CurrentClip = (Get-Clipboard -Raw)
 		}
 		finally {
-			$CurrentClip = ConvertTo-Json -InputObject $CurrentClip -Compress
+			$CurrentClip = (ConvertTo-Json -InputObject $CurrentClip -Compress)
 		}
 
 	}

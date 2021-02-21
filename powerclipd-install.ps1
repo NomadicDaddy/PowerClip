@@ -10,7 +10,7 @@ try {
 	Copy-Item -Path '.\powerclipd.ps1' -Destination "$($env:USERPROFILE)\powerclipd.ps1" -Force
 
 	# create scheduled task that executes when you logon
-	schtasks.exe /Create /SC ONLOGON /TN powerclipd /TR "$((Get-Process -Id $pid).Path) -NoLogo -WindowStyle Hidden -ExecutionPolicy Bypass -Command ""%USERPROFILE%\powerclipd.ps1"" -Force"
+	schtasks.exe /Create /SC ONLOGON /TN powerclipd /TR "'$((Get-Process -Id $pid).Path)' -NoLogo -WindowStyle Hidden -ExecutionPolicy Bypass -Command %USERPROFILE%\powerclipd.ps1 -Force"
 
 	# launch now
 	schtasks.exe /Run /TN powerclipd
